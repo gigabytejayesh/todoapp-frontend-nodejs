@@ -1,13 +1,15 @@
 import "./App.css";
-import { HomePage } from "./components/homepage/homepage";
+import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <HomePage/>
-      </header>
+    // <div className="App">
+    //   <header className="App-header">
+    <div style={{ backgroundColor: "#FEF9E7" }}>
+      <Main />
     </div>
+    //   </header>
+    // </div>
   );
 }
 
