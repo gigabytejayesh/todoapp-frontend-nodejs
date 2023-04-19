@@ -1,14 +1,10 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 const BACKEND_SERVICE_HOST = process.env.REACT_APP_BACKEND_SERVICE_HOST;
 
 export class AppService {
-  constructor() {}
-
-  private async createAxiosInsnace(method: string, url: string, data?: any) {
-    return axios.create({
-      method,
-      url,
-      data,
+  private axiosInstnace: AxiosInstance;
+  constructor() {
+    this.axiosInstnace = axios.create({
       baseURL: `${BACKEND_SERVICE_HOST}`,
       withCredentials: true, // Set this to true to send cookies with the request
     });
@@ -21,9 +17,14 @@ export class AppService {
   }
 
   public async callUserMeAPI() {
-    return await this.createAxiosInsnace(
-      "GET",
-      `${BACKEND_SERVICE_HOST}/users/me`
-    );
+    try {
+      let response = await this.axiosInstnace({
+        url: `${BACKEND_SERVICE_HOST}/users/me`,
+        method: "GET",
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 }
