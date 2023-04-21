@@ -22,7 +22,7 @@ export class AppService {
         url: `${BACKEND_SERVICE_HOST}/users/me`,
         method: "GET",
       });
-      return response.data;
+      return response;
     } catch (error) {
       throw error;
     }
