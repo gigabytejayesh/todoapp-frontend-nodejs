@@ -6,6 +6,9 @@ export class AppService {
   constructor() {
     this.axiosInstnace = axios.create({
       baseURL: `${BACKEND_SERVICE_HOST}`,
+      headers: {
+        "Access-Control-Allow-Origin": "*"
+      },
       withCredentials: true, // Set this to true to send cookies with the request
     });
   }
