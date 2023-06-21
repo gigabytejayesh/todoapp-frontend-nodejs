@@ -6,7 +6,6 @@ import { Component } from "react";
 import { AppService } from "../../services/app.service";
 import {
   AppBar,
-  Avatar,
   Container,
   Paper,
   Toolbar,

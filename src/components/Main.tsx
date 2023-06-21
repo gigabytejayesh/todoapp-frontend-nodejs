@@ -22,13 +22,15 @@ const Loading = () => {
 
 const Main = () => {
   const [apiStatus, setApiStatus] = React.useState("loading");
+  const [user, setUser] = React.useState({});
 
   React.useEffect(() => {
     async function fetchData() {
-      setTimeout(() => {}, 5000);
+      setTimeout(() => {}, 2000);
       try {
         const response: any = await new AppService().callUserMeAPI();
         if (response.status === 200 || response.statusText === "OK") {
+          setUser(response.data);
           setApiStatus("success");
         } else {
           setApiStatus("error");
@@ -45,9 +47,11 @@ const Main = () => {
     <React.Suspense fallback={<Loading />}>
       <Routes>
         {apiStatus === "loading" && <Route path="*" element={<Loading />} />}
-        {apiStatus === "success" && <Route path="/" element={<Workspace />} />}
         {apiStatus === "success" && (
-          <Route path="/workspace" element={<Workspace />} />
+          <Route path="/" element={<Workspace user={user} />} />
+        )}
+        {apiStatus === "success" && (
+          <Route path="/workspace" element={<Workspace user={user} />} />
         )}
         {apiStatus === "error" && <Route path="*" element={<HomePage />} />}
       </Routes>
